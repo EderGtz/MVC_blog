@@ -1,2 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual enviroments
 venv/
+env/
+.env
+
+# Local DB
+*.sqlite3
 *.db
