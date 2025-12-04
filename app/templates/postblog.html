@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Post en Blog de Eder</title>
-    <link href="{{ url_for('static', filename='css/blog/styles.css') }}" rel="stylesheet">
-</head>
-<body>
-    <form method="post" action="{{ url_for('blog.post_blog_page') }}">
-        <p>Title: <input type="text" name="title" required></p>
-        <p>Date: <input type="date" name="date" required></p>
-        
-        <p>Body Text: <input type="text" name="body_text" required></p>
-        
-        <button type="submit">Save</button> 
-        
-        <a href="{{ url_for('blog.logout') }}"><button type="button">Log out</button></a>
-    </form>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Nuevo Post{% endblock %}
+
+{% block content %}
+    <div class="form-container" style="text-align: center; margin-top: 50px;">
+        <h2>Crear Entrada</h2>
+        <form method="post" action="{{ url_for('blog.post_blog_page') }}">
+            <p>Title: <input type="text" name="title" required></p>
+            <p>Date: <input type="date" name="date" required></p>
+            <p>Body Text: <input type="text" name="body_text" required></p>
+            
+            <button type="submit">Save</button> 
+            <a href="{{ url_for('blog.logout') }}"><button type="button" style="background-color: #f44336;">Log out</button></a>
+        </form>
+    </div>
+{% endblock %}

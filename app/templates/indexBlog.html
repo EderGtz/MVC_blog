@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Blog de Eder 𓅍 𓆛</title>
-    <link href="{{ url_for('static', filename='css/blog/styles.css') }}" rel="stylesheet">
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block title %}Blog de Eder 𓅍 𓆛{% endblock %}
+
+{% block content %}
     <div class="header-container" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 40px;">
         <h1>Blog de Eder</h1>
         
         <div class="auth-buttons">
-            <a href="{{ url_for('blog.login') }}"><button>+ Nuevo Post</button></a>
+            {% if session.get('username') %}
+                <a href="{{ url_for('blog.post_blog_page') }}"><button>+ Nuevo Post</button></a>
+                <a href="{{ url_for('blog.logout') }}"><button style="background-color: #f44336;">Salir</button></a>
+            {% else %}
+                <a href="{{ url_for('blog.login') }}"><button>Iniciar Sesión</button></a>
+            {% endif %}
         </div>
     </div>
 
@@ -25,33 +25,4 @@
             </div>
         {% endfor %}
     </div>
-
-    <script>
-        function getRandomColor() {
-            const colors = [
-                '#FFD1DC', '#FFECF1', '#FFF4F6', '#FFDFD3', '#FFE4E1',
-                '#F5E6E8', '#FFE5B4', '#FFEEAD', '#FFF8E7', '#FFFACD',
-                '#F0FFF0', '#E8F8F5', '#E0FFFF', '#E6F9FF', '#F0F8FF',
-                '#E6E6FA', '#F5F5FF', '#F8F8FF', '#EDEDFF', '#EAEAFA',
-                '#F5EDF5', '#FAF0FA', '#FFF0FF', '#FFF5EE', '#FFFAF0',
-                '#FAFAD2', '#FFFFE0', '#FFFDD0', '#F5F5DC', '#E9F7EF',
-                '#D5F5E3', '#C8F8E6', '#B2F7E8', '#A3E4D7', '#98FB98',
-                '#C1F9C1', '#E8F8D6', '#F0F0D6', '#F5F5E6', '#FFF8DC',
-                '#FFEBCD', '#FFE4C4', '#FFDEAD', '#FFDAB9', '#FFCCCC',
-                '#FFC0CB', '#FFB6C1', '#F8C3D0', '#F3D1DC', '#EED5D2'
-            ];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        document.querySelectorAll('.blog-post').forEach(post => {
-            post.addEventListener('click', (event) => {
-                if (!event.target.closest('button')) {
-                    post.style.backgroundColor = getRandomColor();
-                    post.style.transition = "background-color 0.5s ease";
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
+{% endblock %}
